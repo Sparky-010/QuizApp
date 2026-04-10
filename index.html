@@ -10,8 +10,8 @@
       transition: all 300ms ease-in-out;
     }
     button{
-      background: #efe4b7;
-      font-weight: 600;
+      background: #edece6;
+      font-weight: 500;
       padding: 6px 10px;
       display: block;
       width: 100%;
@@ -22,18 +22,18 @@
     }
   </style>
 </head>
-<body class="max-sm:text-[1.2rem] bg-amber-200 w-full font-sans">
+<body class="max-sm:text-[1.2rem] text-gray-700 font-semibold bg-amber-200 w-full font-sans">
   <div class="h-[85vh] w-full justify-items-center content-center text-center mx-auto">
     <!-- welcome -->
     <div class="rounded-[7px] w-[95%] md:w-fit p-9 text-center content-center bg-amber-50" id="welcome">
       <h1 class="font-semibold text-4xl underline">Quiz Time</h1>
-      <p class="my-2.5">Test Your knowledge with this fun quizes</p>
-      <input type="button" class="p-3 cursor-pointer border w-[200px] bg-amber-300 text-amber-50 font-bold rounded-[7px]" id="start" value="Start Quiz" title="Start Quiz">
+      <p class="my-2.5">Test Your knowledge with this Web quizes</p>
+      <input type="button" class="p-3 cursor-pointer border w-[200px] hover:bg-amber-400 bg-amber-300 text-amber-50 font-bold rounded-[7px]" id="start" value="Start Quiz" title="Start Quiz">
     </div>
     <!-- quest and ans -->
     <div class="rounded-[7px] w-[95%] md:w-[40%] p-9 text-center content-center bg-amber-50" id="questBlock" style="display: none;">
-      <h2 id="quest" class="text-center font-bold text-2xl mb-2"></h2>
-      <div class="flex justify-between bg-amber-100 rounded-[7px] py-1 px-2 mb-3">
+      <h2 id="quest" class="text-center font-bold text-[1.3rem] md:text-2xl mb-2"></h2>
+      <div class="flex justify-between bg-gray-50 rounded-[7px] py-1 px-2 mb-3">
         <span>Question: <span id="Qnum"></span></span>
         <span>score: <span id="score"></span></span>
       </div>
@@ -45,17 +45,19 @@
       </div>
     </div>
     <!-- end result -->
-    <div class="rounded-[7px] w-[95%] md:w-fit p-5 md:p-9 text-center content-center bg-amber-50 text-[1.2rem]" id="endResult" style="display: none;">
+    <div class="rounded-[7px] w-[95%] md:w-[40%] p-5 md:p-6 text-center content-center bg-amber-50 text-[1.2rem]" id="endResult" style="display: none;">
       <h2 class="font-semibold text-4xl underline">Quiz Result</h2>
+      <!-- score  & comment -->
+       <div class="bg-gray-200 rounded-[7px] p-2.5 md:p-3 my-3">
+            <p class="shadow shadow-amber-400 rounded-[7px]">You Scored: <span class="font-bold" id="finScore"></span></p><!--final score-->
 
-      <p class="mt-5 bg-amber-100">You Scored: <span class="block font-bold border-r px-2.5 bg-amber-200" id="finScore"></span></p><!--final score-->
-
-      <p class="my-4 w-full shadow shadow-amber-300 font-semibold" id="cmt"></p><!--comment-->
-      <input type="button" class="p-3 cursor-pointer border w-[200px] bg-amber-300 text-amber-50 font-bold rounded-[7px]" id="restart" value="Restart Quiz" title="Restart Quiz">
+            <p class="mt-2 text-[1.3rem] w-full font-bold py-4" id="cmt"></p><!--comment-->
+       </div>
+       <input type="button" class="p-3 cursor-pointer border w-[200px] hover:bg-amber-400 bg-amber-300 text-amber-50 font-bold rounded-[7px]" id="restart" value="Restart Quiz" title="Restart Quiz">
     </div>
   </div>
   <footer class="absolute bottom-0 bg-gray-800 w-full text-gray-200 font-semibold text-center text-[.9rem] mt-5 py-5">
-    <p>&copy; To-Do App</p>
+    <p>&copy; Quiz App</p>
     <i class="underline py-1"><a href="http://sparky-010.github.io/dev" target="_blank" rel="noopener noreferrer" style="letter-spacing: 3px;">Nk.dev profile.</a></i>
     <h5><i>@ NK.dev... 2026</i></h5>
   </footer>
@@ -67,34 +69,48 @@
     const progress = document.getElementById('progress')
     let scoreValue = 0;
     const quests = [
-          {
-            quest: 'What is HTML in full?',
-            opt1: 'Hypher Text Make-up Language',
-            opt2: 'Hyper Text Mark-Up Language',
-            opt3: 'Programming Language',
-            ans: 'Hyper Text Mark-Up Language'
-          },
-          {
-            quest: 'What is JS in full?',
-            opt1: 'JavaScript Language',
-            opt2: 'Java Scripts',
-            opt3: 'JavaScript',
-            ans: 'JavaScript'
-          },
-          {
-            quest: 'What is CSS in full?',
-            opt1: 'Cascading Style Sheet',
-            opt2: 'Creating Style Sheet',
-            opt3: 'Styling Language',
-            ans: 'Cascading Style Sheet'
-          },
-          {
-            quest: 'What level of language is JavaScript?',
-            opt1: 'Program Level Language',
-            opt2: 'High Level language',
-            opt3: 'Low Level Language',
-            ans: 'High Level language'
-          }
+		{
+			quest: 'What is HTML in full?',
+			opt1: 'Hypher Text Make-up Language',
+			opt2: 'Hyper Text Mark-Up Language',
+			opt3: 'Programming Language',
+			ans: 'Hyper Text Mark-Up Language'
+		},
+		{
+			quest: 'What is CSS in full?',
+			opt1: 'Cascading Style Sheet',
+			opt2: 'Creating Style Sheet',
+			opt3: 'Styling Language',
+			ans: 'Cascading Style Sheet'
+		},
+		{
+			quest: 'What is CSS used for?',
+			opt1: 'Styling web pages',
+			opt2: 'Creating Style',
+			opt3: 'Styling Graphic Designs',
+			ans: 'Styling web pages'
+		},
+		{
+			quest: 'What is JS in full?',
+			opt1: 'JavaScript Language',
+			opt2: 'Java Scripts',
+			opt3: 'JavaScript',
+			ans: 'JavaScript'
+		},
+		{
+			quest: 'What level of language is JavaScript?',
+			opt1: 'Program Level Language',
+			opt2: 'High Level language',
+			opt3: 'Low Level Language',
+			ans: 'High Level language'
+		},
+		{
+			quest: 'Which of these is a web programming language?',
+			opt1: 'C#',
+			opt2: 'C++',
+			opt3: 'Python',
+			ans: 'Python'
+		},
     ]
     start.onclick = ()=>{
       welcome.style.display = 'none';
@@ -131,8 +147,8 @@
       if (e.target.tagName === 'BUTTON') {
         setTimeout(finalResult, 1000)
         if (e.target.innerText === quests[i].ans) {
-          e.target.style.background = '#c5f4c5'
           updateScore();
+          e.target.style.background = '#c5f4c5'
           setTimeout(correctAns, 1000)
         }else{
           // wrong ans
@@ -168,11 +184,11 @@
       }else if (calScoreValue >= 30 && calScoreValue < 50) {
         cmt.innerText = 'Try to keep up!'
       }else if (calScoreValue >= 50 && calScoreValue < 60) {
-        cmt.innerText = 'You can do better!'
+        cmt.innerText = 'Not bad! You can do better!'
       }else if (calScoreValue >= 60 && calScoreValue < 80) {
-        cmt.innerText = 'You did good, keep up!'
+        cmt.innerText = 'You did good, keep up!, Keep learning.'
       }else{
-        cmt.innerText = 'Excellent ✅, Go again.'
+        cmt.innerText = '✅ Excellent, Good job keep it up, Go again.'
       }
     }
     // retake quize
